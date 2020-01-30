@@ -9,6 +9,13 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -26,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        AppCenter.start(getApplication(), "233cfe00-a6b7-40cf-9a18-334b4eeca51c",
+                Analytics.class, Crashes.class);
     }
 
     @Override
@@ -48,5 +58,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClickEventTrigger(View view) {
+        // Do something in response to button click
+
+        java.util.Map<String, String> properties = new java.util.HashMap<>();
+        properties.put("Category", "Music");
+        properties.put("FileName", "favorite.avi");
+
+        Analytics.trackEvent("Button clicked", properties);
+        System.out.println("Event triggered");
+
+    }
+
+    public void onClickCrash(View view) {
+
+        java.util.List<Integer> num = new java.util.ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+            int n = (int)Math.random();
+            num.add(n);
+        }
+        System.out.println("Crashing app");
+        System.out.println(num.get(4));
     }
 }
