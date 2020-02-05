@@ -16,6 +16,9 @@ import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
 
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.push.Push;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -34,8 +37,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        AppCenter.start(getApplication(), "233cfe00-a6b7-40cf-9a18-334b4eeca51c",
-                Analytics.class, Crashes.class);
+        //analytics
+        //AppCenter.start(getApplication(), "233cfe00-a6b7-40cf-9a18-334b4eeca51c",
+        //        Analytics.class, Crashes.class);
+
+        //push
+        AppCenter.start(getApplication(), "e540a7f6-2597-4e55-84a1-87014f6e9db9", Push.class);
+
     }
 
     @Override
@@ -73,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickCrash(View view) {
+        System.out.println("Crash Event triggered");
 
         java.util.List<Integer> num = new java.util.ArrayList<>();
 
@@ -84,3 +93,5 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(num.get(4));
     }
 }
+
+
